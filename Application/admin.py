@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import LabResult
 
-# Register your models here.
+@admin.register(LabResult)
+class LabResultAdmin(admin.ModelAdmin):
+    list_display = ('patient_id', 'test_name', 'result_value', 'unit', 'date')
+    search_fields = ('patient_id', 'test_name')

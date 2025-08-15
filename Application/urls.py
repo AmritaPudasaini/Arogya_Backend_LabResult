@@ -1,11 +1,6 @@
 from django.urls import path
-from . import views
+from .views import Report
 
 urlpatterns = [
-    path('test/', views.test_view),
+    path('report/', Report.as_view(), name='lab-report'),
 ]
-
-from django.http import HttpResponse
-
-def test_view(request):
-    return HttpResponse("Hello from Application app!")

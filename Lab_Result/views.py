@@ -1,8 +1,15 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import status
+from .models import LabResult
+from .serializers import LabResultSerializer
 
 @api_view(['GET'])
 def hospital_list(request):
+    """
+    API endpoint to list hospitals.
+    Currently uses hardcoded data.
+    """
     data = [
         {
             "id": "1",
@@ -25,6 +32,10 @@ def hospital_list(request):
 
 @api_view(['GET'])
 def lab_list(request):
+    """
+    API endpoint to list lab tests.
+    Currently uses hardcoded data.
+    """
     data = [
         {
             "id": "1",
@@ -38,13 +49,26 @@ def lab_list(request):
 
 @api_view(['GET'])
 def report_list(request):
-    data = [
-        {
-            "id": "1",
-            "testName": "Complete Blood Count",
-            "date": "2024-01-15",
-            "hospital": "NRL Diagnostics",
-            "status": "Ready",
-        }
-    ]
-    return Response(data)
+    """
+    API endpoint to list lab results (reports) from the database.
+    This view uses the LabResult model and serializer to provide dynamic data.
+    """
+    # Fetch all objects from the LabResult model
+    reports = LabResult.objects.all()
+
+    # Serialize the queryset of reports
+    serializer = LabResultSerializer(reports, many=True)
+
+    # Return the serialized data as a JSON response
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def create_lab_result(request):
+    """
+    API endpoint to create a new lab result.
+    """
+    serializer = LabResultSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

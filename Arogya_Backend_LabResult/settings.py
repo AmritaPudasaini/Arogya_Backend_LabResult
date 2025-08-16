@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Your apps
-    'Application',  # Add your app here
+    'Lab_Result',  # Corrected app name
     'rest_framework',  # If using Django REST Framework
 ]
 
@@ -62,6 +62,7 @@ TEMPLATES = [
     },
 ]
 
+# Corrected WSGI path
 WSGI_APPLICATION = 'Arogya_Backend_LabResult.wsgi.application'
 
 # -------------------------

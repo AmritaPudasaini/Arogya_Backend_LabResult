@@ -28,10 +28,6 @@ INSTALLED_APPS = [
     'rest_framework',  # If using Django REST Framework
 ]
 
-INSTALLED_APPS += ['corsheaders']
-MIDDLEWARE.insert(0, "corsheaders.middleware.CorsMiddleware")
-
-CORS_ALLOW_ALL_ORIGINS = True  # Or set specific origins
 
 # -------------------------
 # MIDDLEWARE

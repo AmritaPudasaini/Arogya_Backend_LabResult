@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import LabResult
 from .serializers import LabResultSerializer
+from rest_framework import viewsets
 
 @api_view(['GET'])
 def hospital_list(request):
@@ -72,3 +73,10 @@ def create_lab_result(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class LabResultViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    A simple ViewSet for viewing lab results.
+    """
+    queryset = LabResult.objects.all().order_by('-date')
+    serializer_class = LabResultSerializer

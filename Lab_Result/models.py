@@ -35,6 +35,7 @@ class LabResultValue(models.Model):
     sub_test_name = models.CharField(max_length=255)
     value = models.CharField(max_length=100)
     unit = models.CharField(max_length=50, blank=True, null=True)
+    reference_range = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f"{self.sub_test_name} - {self.value} {self.unit or ''}"

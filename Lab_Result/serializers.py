@@ -16,7 +16,7 @@ class LabResultValueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = LabResultValue
-        fields = ['id', 'sub_test_name', 'value', 'unit']
+        fields = ['id', 'sub_test_name', 'value', 'unit', 'reference_range']
 
 class LabReportSerializer(serializers.ModelSerializer):
     test_name = serializers.CharField(source='test.name', read_only=True)
@@ -50,9 +50,9 @@ class LabReportSerializer(serializers.ModelSerializer):
             result_id = item.get('id')
             if result_id:
                 # Update existing result
-                LabResultValue.objects.filter(id=result_id, lab_report=instance).update(**item)
+                LabResultValue.objects.filter(id=result_id, report=instance).update(**item)
             else:
                 # Create a new result
-                LabResultValue.objects.create(lab_report=instance, **item)
+                LabResultValue.objects.create(report=instance, **item)
         
         return instance

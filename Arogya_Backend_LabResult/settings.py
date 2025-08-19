@@ -1,3 +1,4 @@
+# settings.py
 from pathlib import Path
 
 # -------------------------
@@ -8,9 +9,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # -------------------------
 # SECURITY SETTINGS
 # -------------------------
-SECRET_KEY = 'django-insecure-change-this-to-your-own-secret-key'  # Change in production
+SECRET_KEY = 'django-insecure-change-this-to-your-own-secret-key'
 DEBUG = True
-ALLOWED_HOSTS = []  # For local dev; in production set actual host(s)
+ALLOWED_HOSTS = []
 
 # -------------------------
 # INSTALLED APPS
@@ -23,17 +24,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Your apps
-    'Lab_Result',  # Corrected app name
-    'rest_framework',  # If using Django REST Framework
-]
+    # Third-party apps
+    'rest_framework',
+    'corsheaders',  # ADD THIS LINE
 
+    # Your apps
+    'Lab_Result',
+]
 
 # -------------------------
 # MIDDLEWARE
 # -------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # ADD THIS LINE
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -50,7 +54,7 @@ ROOT_URLCONF = 'Arogya_Backend_LabResult.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # Add template dirs here if needed
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -106,5 +110,7 @@ USE_TZ = True
 # STATIC FILES
 # -------------------------
 STATIC_URL = 'static/'
-STATICFILES_DIRS = []
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ADD CORS SETTINGS HERE
+CORS_ALLOW_ALL_ORIGINS = True

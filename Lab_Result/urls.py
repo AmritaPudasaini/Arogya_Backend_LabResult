@@ -1,9 +1,12 @@
-from rest_framework.routers import DefaultRouter
 from django.urls import path, include
-from .views import LabResultViewSet
+from rest_framework.routers import DefaultRouter
+from .views import LabTestViewSet, HospitalViewSet, LabReportViewSet
 
 router = DefaultRouter()
-router.register(r'labresults', LabResultViewSet, basename='labresult')
+router.register(r'lab-tests', LabTestViewSet, basename='labtest')
+router.register(r'hospitals', HospitalViewSet, basename='hospital')
+router.register(r'reports', LabReportViewSet, basename='report')
 
-# The `urlpatterns` should only include patterns for this app
-urlpatterns = router.urls
+urlpatterns = [
+    path('', include(router.urls)),
+]

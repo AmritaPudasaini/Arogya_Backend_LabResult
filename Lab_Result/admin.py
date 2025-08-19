@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import LabResult
+from .models import LabTest, Hospital, LabReport, LabResultValue
 
-@admin.register(LabResult)
-class LabResultAdmin(admin.ModelAdmin):
-    list_display = ('patient_id', 'test_name', 'result_value', 'unit', 'date')
-    search_fields = ('patient_id', 'test_name')
+# Register your new models here.
+admin.site.register(LabTest)
+admin.site.register(Hospital)
+admin.site.register(LabReport)
+admin.site.register(LabResultValue)
